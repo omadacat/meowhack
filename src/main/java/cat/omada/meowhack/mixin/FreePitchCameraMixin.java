@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Camera.class)
 public abstract class FreePitchCameraMixin {
-
+/*/
     @Shadow private float yaw;
     @Shadow protected abstract void setRotation(float yaw, float pitch);
 
@@ -23,5 +23,5 @@ public abstract class FreePitchCameraMixin {
         if (eb != null && eb.isFreePitchEnabled()) {
             setRotation(this.yaw, eb.cameraPitch);
         }
-    }
+    } */
 }
