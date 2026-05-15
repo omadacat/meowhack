@@ -50,13 +50,18 @@ public final class LicensePolicy {
 	"MIT Licence",
 	"CC0-1.0",
 	"CC-BY-NC-SA-4.0",
-	"Mozilla Public License Version 2.0"
+	"Mozilla Public License Version 2.0",
+	"GPLv3",
+	"tr7zw Protective License" // MIT rebrand
     );
 
     /** Mod IDs to allow through regardless of license. */
     private static final List<String> ALLOWED_MOD_IDS = List.of(
-        "xaerominimap",
-        "xaeroworldmap"
+        "nochatreports",
+	"xaerominimap", //proprietary trash
+        "xaeroworldmap", 
+	"xaerolib",
+	"badoptimizations" //mit
     );
 
     /** If true, treat "builtin" mods (java, minecraft) as always allowed. */
