@@ -1,6 +1,8 @@
 package cat.omada.meowhack.modules.movement;
 
-import baritone.api.BaritoneAPI;
+import meteordevelopment.meteorclient.systems.modules.Categories;
+import meteordevelopment.meteorclient.systems.modules.Module;
+/* import baritone.api.BaritoneAPI;
 import baritone.api.pathing.goals.GoalBlock;
 import cat.omada.meowhack.util.*;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -12,8 +14,6 @@ import meteordevelopment.meteorclient.events.world.PlaySoundEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.mixininterface.IVec3d;
 import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.systems.modules.player.ChestSwap;
 import meteordevelopment.meteorclient.systems.modules.world.Timer;
@@ -43,7 +43,7 @@ import java.util.List;
 /* Tweaked version of ElytraFlyPlusPlus from Jeff Mod with additional features and Quality of Life improvements */
 
 public class ElytraBounce extends Module {
-
+/*
     private final SettingGroup sgGeneral        = settings.getDefaultGroup();
     private final SettingGroup sgObstaclePasser = settings.createGroup("Obstacle Passer");
     private final SettingGroup sgDiagBounce     = settings.createGroup("Diag Bounce");
@@ -1193,3 +1193,4 @@ public class ElytraBounce extends Module {
         return (float) ((Math.round((n - 45) / 90.0) * 90 + 45 + 360) % 360);
     }
 }
+*/
