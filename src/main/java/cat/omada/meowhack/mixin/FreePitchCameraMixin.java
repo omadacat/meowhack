@@ -1,6 +1,6 @@
 package cat.omada.meowhack.mixin;
 
-import cat.omada.meowhack.modules.movement.ElytraBounce;
+//import cat.omada.meowhack.modules.movement.ElytraBounce;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import net.minecraft.client.render.Camera;
 import net.minecraft.world.BlockView;
