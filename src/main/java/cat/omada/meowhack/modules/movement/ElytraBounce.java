@@ -41,9 +41,9 @@ import net.minecraft.util.math.Vec3d;
 import java.util.List;
 
 /* Tweaked version of ElytraFlyPlusPlus from Jeff Mod with additional features and Quality of Life improvements */
-
-public class ElytraBounce extends Module {
 /*
+public class ElytraBounce extends Module {
+
     private final SettingGroup sgGeneral        = settings.getDefaultGroup();
     private final SettingGroup sgObstaclePasser = settings.createGroup("Obstacle Passer");
     private final SettingGroup sgDiagBounce     = settings.createGroup("Diag Bounce");
