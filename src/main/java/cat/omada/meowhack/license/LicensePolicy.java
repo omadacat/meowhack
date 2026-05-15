@@ -44,7 +44,13 @@ public final class LicensePolicy {
         "gnulgplv3",
         "lgplv3",
         "gnulgplv2.1",
-        "gnulgplv3.0"
+        "gnulgplv3.0",
+	"GNU Lesser General Public License v2.1",
+	"LGPL-3",
+	"MIT Licence",
+	"CC0-1.0".
+	"CC-BY-NC-SA-4.0",
+	"Mozilla Public License Version 2.0"
     );
 
     /** Mod IDs to allow through regardless of license. */
