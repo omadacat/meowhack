@@ -48,16 +48,19 @@ public final class LicensePolicy {
 	"GNU Lesser General Public License v2.1",
 	"LGPL-3",
 	"MIT Licence",
+	"MIT License",
 	"CC0-1.0",
 	"CC-BY-NC-SA-4.0",
 	"Mozilla Public License Version 2.0",
 	"GPLv3",
+	"Apache License 2.0",
 	"tr7zw Protective License" // MIT rebrand
     );
 
     /** Mod IDs to allow through regardless of license. */
     private static final List<String> ALLOWED_MOD_IDS = List.of(
         "nochatreports",
+	"sodium", //open but not free
 	"xaerominimap", //proprietary trash
         "xaeroworldmap", 
 	"xaerolib",
