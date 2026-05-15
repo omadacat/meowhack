@@ -48,7 +48,7 @@ public final class LicensePolicy {
 	"GNU Lesser General Public License v2.1",
 	"LGPL-3",
 	"MIT Licence",
-	"CC0-1.0".
+	"CC0-1.0",
 	"CC-BY-NC-SA-4.0",
 	"Mozilla Public License Version 2.0"
     );
