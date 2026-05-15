@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "cat.omada.meowhack.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "MeteorStarscriptMixin",
+    "FreePitchCameraMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

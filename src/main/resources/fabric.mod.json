@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "gnu-meowhack",
+  "version": "${version}",
+  "name": "GNU/MeowHack",
+  "description": "GNU/MeowHack: your GNU/Hacks",
+  "authors": [
+    "omada.cat"
+  ],
+  "icon": "assets/kitty/icon.png",
+  "license": "GPL-3.0",
+  "environment": "client",
+  "entrypoints": {
+    "meteor": [
+      "cat.omada.meowhack.Kitty"
+    ]
+  },
+  "mixins": [
+    "kitty.mixins.json"
+  ],
+  "custom": {
+    "meteor-client:color": "225,25,25"
+  },
+  "depends": {
+    "java": ">=21",
+    "minecraft": ["${mc_version}"],
+    "meteor-client": "*"
+  }
+}
