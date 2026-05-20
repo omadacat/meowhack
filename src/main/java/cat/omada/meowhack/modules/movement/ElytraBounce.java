@@ -1,8 +1,6 @@
 package cat.omada.meowhack.modules.movement;
 
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-/* import baritone.api.BaritoneAPI;
+import baritone.api.BaritoneAPI;
 import baritone.api.pathing.goals.GoalBlock;
 import cat.omada.meowhack.util.*;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -14,6 +12,8 @@ import meteordevelopment.meteorclient.events.world.PlaySoundEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.mixininterface.IVec3d;
 import meteordevelopment.meteorclient.settings.*;
+import meteordevelopment.meteorclient.systems.modules.Categories;
+import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.systems.modules.player.ChestSwap;
 import meteordevelopment.meteorclient.systems.modules.world.Timer;
@@ -41,7 +41,7 @@ import net.minecraft.util.math.Vec3d;
 import java.util.List;
 
 /* Tweaked version of ElytraFlyPlusPlus from Jeff Mod with additional features and Quality of Life improvements */
-/*
+
 public class ElytraBounce extends Module {
 
     private final SettingGroup sgGeneral        = settings.getDefaultGroup();
@@ -287,6 +287,8 @@ public class ElytraBounce extends Module {
     private int stuckTimer = 0;
     private Vec3d lastPos;
     public float cameraPitch;
+    public float lockedPitch;
+    public float prevEntityPitch;
     public enum DiagState { ALIGNING, BOUNCING, BOOSTING, OBSTACLE_PASSING }
 
     private static final double DIAG_BOOST_ENGAGE_SPEED = 20.0;
@@ -316,6 +318,7 @@ public class ElytraBounce extends Module {
     private int diagPrePasserDelay;
     private BlockPos diagPendingPasserGoal;
     private boolean diagFreeLookEnabledByUs;
+    private boolean baritoneLoaded;
     private boolean diagBaritoneLoaded;
 
     @Override
@@ -323,6 +326,8 @@ public class ElytraBounce extends Module {
     {
         if (mc.player == null || mc.player.getAbilities().allowFlying) return;
 
+        baritoneLoaded = FabricLoader.getInstance().isModLoaded("baritone")
+            || FabricLoader.getInstance().isModLoaded("baritone-meteor");
         startSprinting = mc.player.isSprinting();
         tempPath = null;
         portalTrap = null;
@@ -333,8 +338,10 @@ public class ElytraBounce extends Module {
         lastUnstuckPos = mc.player.getPos();
         stuckTimer = 0;
         cameraPitch = mc.player.getPitch();
+        lockedPitch = pitch.get().floatValue();
+        prevEntityPitch = lockedPitch;
 
-        if (bounce.get() && mc.player.getPos().multiply(1, 0, 1).length() >= 100)
+        if (bounce.get() && baritoneLoaded && mc.player.getPos().multiply(1, 0, 1).length() >= 100)
         {
             if (BaritoneAPI.getProvider().getPrimaryBaritone().getElytraProcess().currentDestination() == null)
             {
@@ -413,7 +420,7 @@ public class ElytraBounce extends Module {
     {
         if (mc.player == null) return;
 
-        if (bounce.get())
+        if (bounce.get() && baritoneLoaded)
         {
             if (BaritoneAPI.getProvider().getPrimaryBaritone().getElytraProcess().currentDestination() == null)
             {
@@ -535,8 +542,8 @@ public class ElytraBounce extends Module {
                         if (speedBps > 20 || tunnelBounce.get())
                         {
                             ((IVec3d)event.movement).meteor$setY(0.0);
+                            mc.player.setVelocity(mc.player.getVelocity().x, 0.0, mc.player.getVelocity().z);
                         }
-                        mc.player.setVelocity(mc.player.getVelocity().x, 0.0, mc.player.getVelocity().z);
                     }
                 }
             }
@@ -584,18 +591,18 @@ public class ElytraBounce extends Module {
 
         if (bounce.get())
         {
-            if (tempPath != null && mc.player.getBlockPos().getSquaredDistance(tempPath) < 500)
+            if (baritoneLoaded && tempPath != null && mc.player.getBlockPos().getSquaredDistance(tempPath) < 500)
             {
                 tempPath = null;
                 BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoal(null);
             }
-            else if (tempPath != null)
+            else if (baritoneLoaded && tempPath != null)
             {
                 BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoalAndPath(new GoalBlock(tempPath));
                 return;
             }
 
-            if (highwayObstaclePasser.get() && BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().getGoal() != null)
+            if (highwayObstaclePasser.get() && baritoneLoaded && BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().getGoal() != null)
             {
                 return;
             }
@@ -610,7 +617,7 @@ public class ElytraBounce extends Module {
                 lastUnstuckPos = mc.player.getPos();
             }
 
-            if (highwayObstaclePasser.get() && mc.player.getPos().length() > 100 &&
+            if (highwayObstaclePasser.get() && baritoneLoaded && mc.player.getPos().length() > 100 &&
                 (mc.player.getY() < targetY.get() || mc.player.getY() > targetY.get() + 2 || (mc.player.horizontalCollision && !mc.player.collidedSoftly)
                 || (portalTrap != null && portalTrap.getSquaredDistance(mc.player.getBlockPos()) < portalAvoidDistance.get() * portalAvoidDistance.get())
                 || waitingForChunksToLoad
@@ -677,7 +684,10 @@ public class ElytraBounce extends Module {
                 }
                 if (lockPitch.get())
                 {
-                    if (freePitch.get()) cameraPitch = mc.player.getPitch();
+                    if (freePitch.get()) {
+                        lockedPitch = pitch.get().floatValue();
+                        prevEntityPitch = lockedPitch;
+                    }
                     mc.player.setPitch(pitch.get().floatValue());
                 }
             }
@@ -1193,4 +1203,3 @@ public class ElytraBounce extends Module {
         return (float) ((Math.round((n - 45) / 90.0) * 90 + 45 + 360) % 360);
     }
 }
-*/

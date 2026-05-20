@@ -76,6 +76,7 @@ public sealed abstract class Result<V, E> {
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public <Ep> Result<V, Ep> mapError(Function<E, Ep> mapper) {
             return (Value<V, Ep>) this;
         }
@@ -114,11 +115,13 @@ public sealed abstract class Result<V, E> {
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public <U> Result<U, E> map(Function<V, U> mapper) {
             return (Error<U, E>) this;
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public <U> Result<U, E> fMap(Function<V, Result<U, E>> mapper) {
             return (Error<U, E>) this;
         }

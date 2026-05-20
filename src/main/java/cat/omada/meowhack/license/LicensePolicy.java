@@ -40,11 +40,11 @@ public final class LicensePolicy {
 
     /** Common alternative spellings mods use in their fabric.mod.json that don't match SPDX exactly. */
     private static final List<String> ALT_LICENSES = List.of(
-        "gpl3",
-        "gnulgplv3",
-        "lgplv3",
-        "gnulgplv2.1",
-        "gnulgplv3.0",
+    "gpl3",
+    "gnulgplv3",
+    "lgplv3",
+    "gnulgplv2.1",
+    "gnulgplv3.0",
 	"GNU Lesser General Public License v2.1",
 	"LGPL-3",
 	"MIT Licence",
@@ -59,10 +59,10 @@ public final class LicensePolicy {
 
     /** Mod IDs to allow through regardless of license. */
     private static final List<String> ALLOWED_MOD_IDS = List.of(
-        "nochatreports",
+    "nochatreports",
 	"sodium", //open but not free
 	"xaerominimap", //proprietary trash
-        "xaeroworldmap", 
+    "xaeroworldmap", 
 	"xaerolib",
 	"badoptimizations" //mit
     );

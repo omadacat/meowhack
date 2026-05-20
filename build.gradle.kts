@@ -59,5 +59,6 @@ tasks {
     withType<JavaCompile> {
         options.encoding = "UTF-8"
         options.release = 21
+        options.compilerArgs.add("-Xlint:unchecked")
     }
 }
